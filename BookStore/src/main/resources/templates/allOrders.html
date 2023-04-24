@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заказов</title>
+</head>
+<body>
+<h3>Список заказов</h3>
+<a href="/admin"><input type="button" value="Вернуться в личный кабинет"></a><br><br>
+<form method="post" th:action="@{/order/search}" style="width: 350px">
+    <fieldset>
+        <legend>Поиск заказов</legend>
+        <br>
+        <input type="text" placeholder="Введите номер заказ" name="search" style="width: 300px" th:value="*{valueSearch}">
+        <br><br>
+        <input type="submit" value="Найти">
+    </fieldset>
+</form><br>
+
+<div th:each="order : ${orders}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
+    <h3 th:text="'Номер заказа: ' + ${order.getId()}"></h3>
+    <p th:text="'Покупатель: ' + ${order.getPerson().getLast_name()} + ' ' + ${order.getPerson().getFirst_name()} + ' ' + ${order.getPerson().getPatronymic()}"></p>
+    <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="100px">
+    <p th:text="'Наименование товара: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Статус заказа: ' + ${order.getStatus()}"></p>
+    <p th:text="'Сумма заказа: ' + ${order.getPrice()} + ' руб.'"></p>
+
+    <a th:href="@{/updateStatus/{id}(id=${order.getId()})}"><input type="button" value="Изменить статус заказа"></a>
+</div>
+</body>
+</html>

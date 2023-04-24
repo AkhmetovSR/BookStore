@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Найденные заказы</title>
+</head>
+<body>
+    <a href="/admin"><input type="button" value="Вернуться в личный кабинет"></a><br><br>
+    <a href="/allorder"><input type="button" value="Вернуться к списку заказов"></a><br><br>
+    <h3>Найденные заказы</h3>
+    <hr>
+  <div>
+      <div th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
+          <h3 th:text="'Номер заказа: ' + ${foundOrder.getId()}"></h3>
+          <p th:text="'Покупатель: ' + ${foundOrder.getPerson().getLast_name()} + ' ' + ${foundOrder.getPerson().getFirst_name()} + ' ' + ${foundOrder.getPerson().getPatronymic()}"></p>
+          <img th:src="'/img/' + ${foundOrder.getProduct().imageList[0].getFileName()}" width="100px">
+          <p th:text="'Наименование товара: ' + ${foundOrder.getProduct().getTitle()}"></p>
+          <p th:text="'Статус заказа: ' + ${foundOrder.getStatus()}"></p>
+          <p th:text="'Сумма заказа: ' + ${foundOrder.getPrice()} + ' руб.'"></p>
+      </div>
+  </div>
+</body>
+</html>

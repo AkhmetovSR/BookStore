@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о пользователе</title>
+</head>
+<body>
+    <h3>Информация о пользователе</h3>
+    <a href="/admin"><input type="button" value="Вернуться в личный кабинет"></a><br><br>
+    <form th:method="post" th:action="@{/changeRole/{id}(id=${person.getId()})}" th:object="${person}" style="width: 300px; border: 1px solid grey; border-radius: 5px; margin: 10px; padding: 10px" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <p>Имя: <span th:text="${person.getFirst_name()}"></span></p>
+        <p>Фамилия: <span th:text="${person.getLast_name()}"></span></p>
+        <p>Отчество: <span th:text="${person.getPatronymic()}"></span></p>
+        <p>Email: <span th:text="${person.getEmail()}"></span></p>
+        <p>Телефон: <span th:text="${person.getPhone()}"></span></p>
+        <p>Роль: <span th:text="${person.getRole()}"></span></p>
+        <br>
+        <input type="submit" value="Сменить роль">
+    </form>
+</body>
+</html>

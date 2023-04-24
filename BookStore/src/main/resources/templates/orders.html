@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои заказы</title>
+</head>
+<body>
+  <h3>Мои заказы</h3>
+  <div th:each="order : ${orders}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 20px">
+    <p th:text="'Заказ №' + ${order.getId()}"></p>
+      <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="100px">
+      <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+      <p th:text="'Количество: ' + ${order.getCount()}"></p>
+      <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+      <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime())}"></p>
+      <p th:text="'Статус заказа: ' + ${order.getStatus()}"></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление товаров</title>
+</head>
+<body>
+  <h2>Добавление товаров</h2>
+  <a href="/admin"><input type="button" value="Вернуться в личный кабинет"></a><br><br>
+  <form th:method="post" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data"  th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+      <input type="text" placeholder="Название книги" th:field="*{title}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div><br>
+
+      <input type="text" placeholder="Автор" th:field="*{author}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div><br>
+
+      <input type="text" placeholder="Страна" th:field="*{country}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div><br>
+
+      <input type="text" placeholder="Издатель" th:field="*{publisher}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></div><br>
+
+      <input type="text" placeholder="Кол-во страниц" th:field="*{pages}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}"></div><br>
+
+      <input type="text" placeholder="Год издания" th:field="*{year_of_issue}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('year_of_issue')}" th:errors="*{year_of_issue}"></div><br>
+
+      <textarea placeholder="Описание" th:field="*{descriptions}"></textarea><br>
+      <div style="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"></div><br>
+
+      <input type="text" placeholder="Цена" th:field="*{price}"><br>
+      <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div><br>
+      <p style="color: red">Можно добавить до 3 фото товара</p>
+      <input type="file" name="file_one">
+      <input type="file" name="file_two">
+      <input type="file" name="file_three">
+      <br>
+      <br>
+      <input type="submit" value="Добавить">
+  </form>
+</body>
+</html>

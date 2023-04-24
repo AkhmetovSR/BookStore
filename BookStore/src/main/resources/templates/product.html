@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Витрина товаров</title>
+</head>
+<body>
+    <h3 th:text="'Вы вошли под логином: ' + ${account}" ></h3>
+    <form method="post" th:action="@{/logout}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="Выйти из личного кабинета">
+    </form><br>
+    <form method="get" th:action="@{/orders}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="Посмотреть мои заказы">
+    </form><br>
+    <form method="get" th:action="@{/cart}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="Посмотреть корзину">
+    </form><br>
+    <h3>Доступные товары</h3>
+    <form method="post" th:action="@{/product/search}">
+        <fieldset>
+            <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+            <br>
+            <input type="text" placeholder="Введите наименование товара" name="search" style="width: 200px" th:value="*{valueSearch}">
+            <br>
+            <p>Цена (руб.)</p>
+            <label for="from">от</label>
+            <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
+            <label for="to">до</label>
+            <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
+            <br>
+            <br>
+            <div>
+                <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
+                <label for="ascending_price">Сортировать по возрастанию цены</label><br>
+                <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
+                <label for="descending_price">Сортировать по убыванию цены</label>
+            </div>
+        </fieldset>
+        <br>
+        <input type="submit" value="Найти">
+    </form><br>
+    <h3>Найденные товары</h3>
+    <div th:each="product : ${searchProduct}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+        <br>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <br>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+    </div>
+
+    <h3>Доступные товары</h3>
+    <div th:each="product : ${products}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+        <br>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <br>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+        <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину"</a>
+    </div>
+</body>
+</html>

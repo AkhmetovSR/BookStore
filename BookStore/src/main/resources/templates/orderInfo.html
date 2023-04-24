@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение статуса заказа</title>
+</head>
+<body>
+<h3>Изменение статуса заказа</h3>
+<a href="/allorder"><input type="button" value="Вернуться к списку заказов"></a><br><br>
+<form method="post" th:action="@{/updateStatus/{id}(id=${updateOrder.getId()})}" th:object="${updateOrder}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
+    <h4 type="text" th:text="'Заказ №: ' + ${updateOrder.getId()}"></h4>
+    <p th:text="'Покупатель: ' + ${updateOrder.getPerson().getLast_name()} + ' ' + ${updateOrder.getPerson().getFirst_name()} + ' ' + ${updateOrder.getPerson().getPatronymic()}"></p>
+    <img th:src="'/img/' + ${updateOrder.getProduct().imageList[0].getFileName()}" width="100px">
+    <p th:text="'Наименование товара: ' + ${updateOrder.getProduct().getTitle()}"></p>
+    <p th:text="'Статус заказа: ' + ${updateOrder.getStatus()}"></p>
+    <p th:text="'Сумма заказа: ' + ${updateOrder.getPrice()} + ' руб.'"></p>
+    <select id="state" th:field="*{status}">
+        <option th:each="enum : ${T(com.example.bookstore.enumm.Status).values()}" th:text="${enum}" th:value="${enum}"></option>
+    </select>
+    <input type="submit" value="Изменить статус заказа">
+</form>
+</body>
+</html>

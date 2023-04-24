@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+  <h3>Список пользователей</h3>
+  <a href="/admin"><input type="button" value="Вернуться в личный кабинет"></a><br><br>
+  <form th:each="person : ${persons}" style="width: 300px; border: 1px solid grey; border-radius: 5px; margin: 10px; padding: 10px" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <p th:text="'ФИО: ' + ${person.getLast_name} + ' ' + ${person.getFirst_name} + ' ' + ${person.getPatronymic}"></p>
+      <p th:text="'Email: ' + ${person.getEmail()}"></p>
+      <p th:text="'Роль пользователя: ' + ${person.getRole()}"></p>
+      <a th:href="@{/personInfo/{id}(id=${person.getId()})}"><input type="button" value="Посмотреть профиль"></a>
+  </form>
+</body>
+</html>

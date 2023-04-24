@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Книжная интернет-лавка</title>
+</head>
+<body>
+<h3>Доступные товары</h3>
+<h4 style="color: red">Для того, чтобы сделать заказ, пожалуйста <a href="/registration"><input type="button" value="Зарегестрируйтесь"></a> или <a href="/authentication"><input type="button" value="Войдите"></a> в ситему.</h4>
+<form method="post" th:action="@{/search/allPerson}">
+  <fieldset>
+    <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+    <br>
+    <input type="text" placeholder="Введите наименование товара" name="search" style="width: 200px" th:value="*{valueSearch}">
+    <br>
+    <p>Цена (руб.)</p>
+    <label for="from">от</label>
+    <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
+    <label for="to">до</label>
+    <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
+    <br>
+    <br>
+    <div>
+      <input type="radio" id="asc_price" name="price" value="sorted_by_ascending_price">
+      <label for="asc_price">Сортировать по возрастанию цены</label><br>
+      <input type="radio" id="desc_price" name="price" value="sorted_by_descending_price">
+      <label for="desc_price">Сортировать по убыванию цены</label>
+      <br>
+      <input type="submit" value="Найти">
+    </div>
+  </fieldset>
+</form><br>
+<h3>Найденные товары</h3>
+<div th:each="product : ${foundProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px">
+  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+  <br>
+  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+  <br>
+  <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+</div>
+
+<h3>Доступные товары</h3>
+<div th:each="product : ${allProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px">
+  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+  <br>
+  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+  <br>
+  <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+</div>
+</body>
+</html>
