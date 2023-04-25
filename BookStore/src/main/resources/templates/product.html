@@ -41,22 +41,22 @@
     </form><br>
     <h3>Найденные товары</h3>
     <div th:each="product : ${searchProduct}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
-        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" th:href="@{/product/info/{id}(id=${product.getId()})}" width="200px">
         <br>
-        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="'Название: ' + ${product.getTitle()}"></a>
         <br>
-        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-        <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину</a>
+        <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
+        <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину"></a>
     </div>
 
     <h3>Доступные товары</h3>
     <div th:each="product : ${products}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
         <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
         <br>
-        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="'Название: ' + ${product.getTitle()}"></a>
         <br>
-        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-        <a th:href="@{/cart/add/{id}(id=${product.getId()})}">Добавить в корзину"</a>
+        <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
+        <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину"></a>
     </div>
 </body>
 </html>

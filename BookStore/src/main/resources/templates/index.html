@@ -31,21 +31,21 @@
   </fieldset>
 </form><br>
 <h3>Найденные товары</h3>
-<div th:each="product : ${foundProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px">
-  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+<div th:each="product : ${foundProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
+  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
   <br>
   <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
   <br>
-  <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+  <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
 </div>
 
 <h3>Доступные товары</h3>
-<div th:each="product : ${allProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px">
-  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+<div th:each="product : ${allProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
+  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
   <br>
   <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
   <br>
-  <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+  <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
 </div>
 </body>
 </html>
