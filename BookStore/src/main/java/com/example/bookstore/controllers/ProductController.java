@@ -33,7 +33,7 @@ public class ProductController {
     @GetMapping("/info/{id}")
     public String infoProduct(@PathVariable("id") int id, Model model){
         model.addAttribute("product", productService.getProduct(id));
-        return "/product/infoProduct";
+        return "/infoProduct";
     }
 
     @PostMapping("/product/search")
@@ -60,6 +60,33 @@ public class ProductController {
             else if(price.equals("sorted_by_descending_price")){
                 model.addAttribute("searchProduct", productRepository.findByTitleOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(from), Float.parseFloat(to)));
             }
+        }
+
+        else if(search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("searchProduct", productRepository.findAllByOrderByPriceAsc());
+        }
+        else if(search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("searchProduct", productRepository.findAllByOrderByPriceDesc());
+        }
+
+        else if(!search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("searchProduct", productRepository.findByTitleOrderByPriceAsc(search.toLowerCase()));
+        }
+
+        else if(!search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("searchProduct", productRepository.findByTitleOrderByPriceDesc(search.toLowerCase()));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.isEmpty()){
+            model.addAttribute("searchProduct", productRepository.findAllByPrice(Float.parseFloat(from), Float.parseFloat(to)));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("searchProduct", productRepository.findAllByOrderByPriceAsc(Float.parseFloat(from), Float.parseFloat(to)));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("searchProduct", productRepository.findAllByOrderByPriceDesc(Float.parseFloat(from), Float.parseFloat(to)));
         }
 
         model.addAttribute("products", productService.getAllProduct());
@@ -93,6 +120,33 @@ public class ProductController {
             else if(price.equals("sorted_by_descending_price")){
                 model.addAttribute("foundProducts", productRepository.findByTitleOrderByPriceDesc(search.toLowerCase(), Float.parseFloat(from), Float.parseFloat(to)));
             }
+        }
+
+        else if(search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("foundProducts", productRepository.findAllByOrderByPriceAsc());
+        }
+        else if(search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("foundProducts", productRepository.findAllByOrderByPriceDesc());
+        }
+
+        else if(!search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("foundProducts", productRepository.findByTitleOrderByPriceAsc(search.toLowerCase()));
+        }
+
+        else if(!search.isEmpty() & from.isEmpty() & to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("foundProducts", productRepository.findByTitleOrderByPriceDesc(search.toLowerCase()));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.isEmpty()){
+            model.addAttribute("foundProducts", productRepository.findAllByPrice(Float.parseFloat(from), Float.parseFloat(to)));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.equals("sorted_by_ascending_price")){
+            model.addAttribute("foundProducts", productRepository.findAllByOrderByPriceAsc(Float.parseFloat(from), Float.parseFloat(to)));
+        }
+
+        else if(search.isEmpty() & !from.isEmpty() & !to.isEmpty() & price.equals("sorted_by_descending_price")){
+            model.addAttribute("foundProducts", productRepository.findAllByOrderByPriceDesc(Float.parseFloat(from), Float.parseFloat(to)));
         }
 
         model.addAttribute("allProducts", productService.getAllProduct());
