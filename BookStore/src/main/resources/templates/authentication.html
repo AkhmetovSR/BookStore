@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Аутентификация</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
 <body>
-  <h3>Вход</h3>
-  <a href="/"><input type="button" value="Вернуться на главную страницу"></a><br><br>
-  <form method="POST" action="process_login">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-    <input type="text" placeholder="Введите логин" name="username">
-    <input type="password" placeholder="Введите пароль" name="password">
-    <input type="submit">
-  </form>
-  <div th:if="${param.error}" style="color: red">
-    Неверны логин или пароль
-  </div>
+<a href="/"><input type="button" value="Вернуться на главную страницу" id="back"></a><br><br>
+<div id="main_authentication">
+
+    <div id="form_authentication">
+        <h3>Вход в аккаунт</h3>
+        <form method="POST" action="process_login">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div id="login_authentication"><input type="text" placeholder="Введите логин" name="username" id="eml"></div>
+            <div id="pswd_authentication"><input type="password" placeholder="Введите пароль" name="password" id="pswd"></div>
+            <div><input type="submit" id="btn_authentication" value="Войти"></div>
+        </form>
+    </div>
+    <div th:if="${param.error}" style="color: red">
+        Неверны логин или пароль
+    </div>
+</div>
 </body>
 </html>

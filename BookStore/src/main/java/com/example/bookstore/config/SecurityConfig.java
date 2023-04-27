@@ -24,7 +24,7 @@ SecurityConfig {
         http
                 //.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authentication", "/error", "/registration", "/product/info/{id}", "/product/info", "/index", "/", "", "/search/allPerson", "/img/{}", "/infoProductAllperson").permitAll()
+                .requestMatchers("/authentication", "/error", "/registration", "/product/info/{id}", "/product/info", "/index", "/", "", "/search/allPerson", "/img/{}", "/infoProductAllperson", "/resources/**", "/static/**", "/static.css/**", "/index.css", "/css/**", "/image/**", "/user/index", "/static/css/index.css").permitAll()
                 .requestMatchers("/admin", "/productAdd", "/admin/product/add", "/addProduct", "/getPerson", "/admin/changeRole", "/personInfo/{id}", "/changeRole/{id}", "/allorder","/allOrders", "/updateStatus", "/orderInfo", "/admin/product/delete/{id}", "/order/search", "/foundorder").hasRole("ADMIN")
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()

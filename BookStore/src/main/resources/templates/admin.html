@@ -3,30 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Личный кабинет администратора</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
 <body>
-<div>
-    <h2>Личный кабинет администратора</h2>
-    <form method="post" th:action="@{/logout}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="submit" value="Выйти из личного кабинета">
-    </form><br>
-    <a href="admin/product/add"><input type="button" value="Добавить товар"></a>
-    <a href="allperson"><input type="button" value="Посмотреть список пользователей"></a>
-    <a href="allorder"><input type="button" value="Посмотреть список заказов"></a>
-</div>
-  <div th:each="product : ${products}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
-      <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
-      <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="100px">
-      <p th:text="'Автор: ' + ${product.getAuthor()}"></p>
-      <p th:text="'Страна: ' + ${product.getCountry()}"></p>
-      <p th:text="'Издатель: ' + ${product.getPublisher()}"></p>
-      <p th:text="'Кол-во страниц: ' + ${product.getPages()}"></p>
-      <p th:text="'Год издания: ' + ${product.getYear_of_issue()}"></p>
-      <p th:text="'Описание: ' + ${product.getDescriptions()}"></p>
-      <p th:text="'Цена: ' + ${product.getPrice()}"></p><br>
 
-      <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}"><input type="button" value="Редактировать товар"></a>
-      <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}"><input type="button" value="Удалить товар"></a>
-  </div>
+<div id="lk_admin">
+    <div><strong>Личный кабинет администратора</strong></div>
+    <div>
+        <a href="admin/product/add"><input type="button" value="Добавить товар" id="add_product"></a>
+    </div>
+    <div>
+        <a href="allperson"><input type="button" value="Посмотреть список пользователей" id="person_list"></a>
+    </div>
+    <div>
+        <a href="allorder"><input type="button" value="Посмотреть список заказов" id="order_list"></a>
+    </div>
+    <div>
+        <form method="post" th:action="@{/logout}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <input type="submit" value="Выйти из личного кабинета" id="logout">
+        </form>
+    </div>
+</div>
+
+<div id="amin_all_product">
+    <div id="admin_product_card" th:each="product : ${products}"
+         style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
+        <div>
+            <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+            <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="100px">
+            <p th:text="'Автор: ' + ${product.getAuthor()}"></p>
+            <p th:text="'Страна: ' + ${product.getCountry()}"></p>
+            <p th:text="'Издатель: ' + ${product.getPublisher()}"></p>
+            <p th:text="'Кол-во страниц: ' + ${product.getPages()}"></p>
+            <p th:text="'Год издания: ' + ${product.getYear_of_issue()}"></p>
+            <p th:text="'Описание: ' + ${product.getDescriptions()}"></p>
+            <p th:text="'Цена: ' + ${product.getPrice()}"></p><br>
+        </div>
+        <div id="admin_btn_edit_delete">
+            <div>
+                <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}"><input id="admin_edit_product"
+                                                                                       type="button"
+                                                                                       value="Редактировать товар"></a>
+            </div>
+
+            <div>
+                <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}"><input id="admin_delete_product"
+                                                                                         type="button"
+                                                                                         value="Удалить товар"></a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

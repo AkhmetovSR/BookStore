@@ -3,60 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <title>Витрина товаров</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
+</head>
+
 </head>
 <body>
-    <h3 th:text="'Вы вошли под логином: ' + ${account}" ></h3>
-    <form method="post" th:action="@{/logout}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="submit" value="Выйти из личного кабинета">
-    </form><br>
-    <form method="get" th:action="@{/orders}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="submit" value="Посмотреть мои заказы">
-    </form><br>
-    <form method="get" th:action="@{/cart}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="submit" value="Посмотреть корзину">
-    </form><br>
-    <h3>Доступные товары</h3>
-    <form method="post" th:action="@{/product/search}">
-        <fieldset>
-            <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
-            <br>
-            <input type="text" placeholder="Введите наименование товара" name="search" style="width: 200px" th:value="*{valueSearch}">
-            <br>
-            <p>Цена (руб.)</p>
-            <label for="from">от</label>
-            <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
-            <label for="to">до</label>
-            <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
-            <br>
-            <br>
-            <div>
-                <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">
-                <label for="ascending_price">Сортировать по возрастанию цены</label><br>
-                <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">
-                <label for="descending_price">Сортировать по убыванию цены</label>
-            </div>
-        </fieldset>
-        <br>
-        <input type="submit" value="Найти">
-    </form><br>
-    <h3>Найденные товары</h3>
-    <div th:each="product : ${searchProduct}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
-        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" th:href="@{/product/info/{id}(id=${product.getId()})}" width="200px">
-        <br>
-        <a th:href="@{/info/{id}(id=${product.getId()})}" th:text="'Название: ' + ${product.getTitle()}"></a>
-        <br>
-        <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
-        <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину"></a>
+
+<div id="header">
+    <div id="div_logo"><img
+            src="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+            id="logo"></div>
+    <div><strong>Интернет магазин книг</strong></div>
+    <div>Главная</div>
+    <div>О нас</div>
+    <div>Доставка/оплата</div>
+    <div></div>
+    <div></div>
+</div>
+
+<div id="main">
+
+    <div id="lk">
+        <div><strong th:text="'Вы вошли под логином: ' + ${account}"></strong></div>
+        <div>
+            <form method="get" th:action="@{/cart}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="submit" value="Посмотреть корзину" id="cart">
+            </form>
+        </div>
+        <div>
+            <form method="get" th:action="@{/orders}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="submit" value="Посмотреть мои заказы" id="order">
+            </form>
+        </div>
+        <div>
+            <form method="post" th:action="@{/logout}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="submit" value="Выйти из личного кабинета" id="logout">
+            </form>
+        </div>
     </div>
 
-    <h3>Доступные товары</h3>
-    <div th:each="product : ${products}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
-        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
-        <br>
-        <a th:href="@{/info/{id}(id=${product.getId()})}" th:text="'Название: ' + ${product.getTitle()}"></a>
-        <br>
-        <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
-        <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину"></a>
+    <div id="search">
+        <form method="post" th:action="@{/product/search}">
+            <fieldset id="search_fieldset">
+                <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+                <div id="search_parameter">
+                    <div id="search_field">
+                        <input type="text" placeholder="Введите наименование товара" name="search" style="width: 200px"
+                               th:value="*{valueSearch}">
+                    </div>
+
+                    <div id="search_select_value">
+                        <label for="from">от</label>
+                        <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
+                        <label for="to">до</label>
+                        <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
+                        <span>руб.</span>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="asc_price" name="price" value="sorted_by_ascending_price">
+                        <label for="asc_price">по возрастанию цены</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="desc_price" name="price" value="sorted_by_descending_price">
+                        <label for="desc_price">по убыванию цены</label>
+                    </div>
+                </div>
+
+                <div id="search_button">
+                    <input type="submit" value="Найти" id="search_btn">
+                </div>
+            </fieldset>
+        </form>
     </div>
+
+    <h3 style="margin-left: 5%">Найденные товары</h3>
+    <div id="found_product">
+        <div th:each="product : ${searchProduct}" id="found_product_card"
+             style="border-radius: 5px; margin: 5px; width: 200px">
+            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}" id="f_img"></div>
+            <div><a th:href="@{/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a></div>
+            <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>
+            <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину" id="add_found"></a>
+        </div>
+    </div>
+
+
+    <h3 style="margin-left: 5%">Доступные товары</h3>
+    <div id="all_product">
+        <div th:each="product : ${products}" id="product_card"
+             style="border-radius: 5px; margin: 5px; width: 200px">
+            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}" id="a_img"></div>
+            <div><a th:href="@{/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a></div>
+            <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>
+            <a th:href="@{/cart/add/{id}(id=${product.getId()})}"><input type="button" value="Добавить в корзину" id="add_a"></a>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

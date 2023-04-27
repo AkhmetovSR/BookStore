@@ -1,51 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Книжная интернет-лавка</title>
+    <meta charset="UTF-8">
+    <title>Книжная интернет-лавка</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
-<body>
-<h3>Доступные товары</h3>
-<h4 style="color: red">Для того, чтобы сделать заказ, пожалуйста <a href="/registration"><input type="button" value="Зарегестрируйтесь"></a> или <a href="/authentication"><input type="button" value="Войдите"></a> в ситему.</h4>
-<form method="post" th:action="@{/search/allPerson}">
-  <fieldset>
-    <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
-    <br>
-    <input type="text" placeholder="Введите наименование товара" name="search" style="width: 200px" th:value="*{valueSearch}">
-    <br>
-    <p>Цена (руб.)</p>
-    <label for="from">от</label>
-    <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
-    <label for="to">до</label>
-    <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
-    <br>
-    <br>
-    <div>
-      <input type="radio" id="asc_price" name="price" value="sorted_by_ascending_price">
-      <label for="asc_price">Сортировать по возрастанию цены</label><br>
-      <input type="radio" id="desc_price" name="price" value="sorted_by_descending_price">
-      <label for="desc_price">Сортировать по убыванию цены</label>
-      <br>
-      <input type="submit" value="Найти">
-    </div>
-  </fieldset>
-</form><br>
-<h3>Найденные товары</h3>
-<div th:each="product : ${foundProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
-  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
-  <br>
-  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-  <br>
-  <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
+<body id="body">
+
+<div id="header">
+    <div id="div_logo"><img
+            src="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+            id="logo"></div>
+    <div><strong>Интернет магазин книг</strong></div>
+    <div>Главная</div>
+    <div>О нас</div>
+    <div>Доставка/оплата</div>
+    <div></div>
+    <div></div>
 </div>
 
-<h3>Доступные товары</h3>
-<div th:each="product : ${allProducts}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px">
-  <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
-  <br>
-  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-  <br>
-  <p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p>
+<div id="main">
+    <div id="alert">
+        <h4 style="color: red">!!!!!!!!!!!!Для оформления заказа, пожалуйста <a href="/registration"><input
+                type="button"
+                value="Зарегестрируйтесь"
+                id="button_registration"></a>
+            или <a href="/authentication"><input type="button" value="Войдите" id="button_login"></a> в ситему.</h4>
+    </div>
+
+    <div id="search">
+        <form method="post" th:action="@{/search/allPerson}">
+            <fieldset id="search_fieldset">
+                <legend>Выберите параметры для сортировки, поиска, фильтрации</legend>
+                <div id="search_parameter">
+                    <div id="search_field">
+                        <input type="text" placeholder="Введите наименование товара" name="search"
+                               style="width: 200px"
+                               th:value="*{valueSearch}">
+                    </div>
+
+                    <div id="search_select_value">
+                        <label for="from">от</label>
+                        <input type="text" placeholder="0" name="from" id="from" th:value="*{valuePriceFrom}">
+                        <label for="to">до</label>
+                        <input type="text" placeholder="100 000" name="to" id="to" th:value="*{valuePriceTo}">
+                        <span>руб.</span>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="asc_price" name="price" value="sorted_by_ascending_price">
+                        <label for="asc_price">по возрастанию цены</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="desc_price" name="price" value="sorted_by_descending_price">
+                        <label for="desc_price">по убыванию цены</label>
+                    </div>
+                </div>
+                <div id="search_button">
+                    <input type="submit" value="Найти" id="search_btn">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+<!--    <div id="found_product_card">-->
+<!--        <div th:each="product : ${foundProducts}" style="border-radius: 5px; margin: 5px; width: 200px">-->
+<!--            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}">-->
+<!--                <div>-->
+<!--                    <div><a th:href="@{/product/info/{id}(id=${product.getId()})}" width="200px" th:text="${product.getTitle()}"></a>-->
+<!--                    </div>-->
+<!--                    <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <h3 style="margin-left: 5%">Найденные товары</h3>
+    <div id="found_product">
+        <div th:each="product : ${foundProducts}" id="found_product_card"
+             style="border-radius: 5px; margin: 5px; width: 200px">
+            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px" id="f_img"></div>
+            <div><a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a></div>
+            <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>
+        </div>
+    </div>
+
+    <h3 style="margin-left: 5%">Доступные товары</h3>
+    <div id="all_product">
+        <div th:each="product : ${allProducts}" id="product_card"
+             style="border-radius: 5px; margin: 5px; width: 200px">
+            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px" id="a_img"></div>
+            <div><a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a></div>
+            <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

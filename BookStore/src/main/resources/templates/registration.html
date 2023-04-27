@@ -3,25 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
 <body>
-  <a href="/"><input type="button" value="Вернуться на главную страницу"></a><br><br>
-  <form method="post" th:action="@{/registration}" th:object="${person}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 10px">
-    <h3>Форма регистрации</h3>
-    <input type="text" placeholder="Имя" th:field="*{first_name}"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{first_name}"></span><br>
+<a href="/"><input type="button" value="Вернуться на главную страницу" id="back"></a><br><br>
+<div id="main_registration">
 
-    <input type="text" placeholder="Фамилия" th:field="*{last_name}"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{last_name}"></span><br>
+    <form method="post" th:action="@{/registration}" th:object="${person}" th:name="${_csrf.parameterName}"
+          th:value="${_csrf.token}">
+        <div id="f9">
+            <h3>Форма регистрации</h3>
+        </div>
+        <div id="f1">
+            <input type="text" placeholder="Имя" th:field="*{first_name}" id="first_name"><span style="color: red"
+                                                                                th:if="${#fields.hasErrors('email')}"
+                                                                                th:errors="*{first_name}"></span>
+        </div>
 
-    <input type="text" placeholder="Отчество" th:field="*{patronymic}"><br>
+        <div id="f2">
+            <input type="text" placeholder="Фамилия" th:field="*{last_name}" id="last_name"><span style="color: red"
+                                                                                   th:if="${#fields.hasErrors('email')}"
+                                                                                   th:errors="*{last_name}"></span>
+        </div>
 
-    <input type="text" placeholder="Возраст" th:field="*{age}"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{age}"></span><br>
-    <input type="text" placeholder="email" th:field="*{email}" name="username"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+        <div id="f3">
+            <input type="text" placeholder="Отчество" th:field="*{patronymic}" id="patronymic">
+        </div>
 
-    <input type="text" placeholder="Телефон" th:field="*{phone}"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{phone}"></span><br>
+        <div id="f4">
+            <input type="text" placeholder="Возраст" th:field="*{age}" id="age"><span style="color: red"
+                                                                             th:if="${#fields.hasErrors('email')}"
+                                                                             th:errors="*{age}"></span>
+        </div>
 
-    <input type="password" placeholder="Пароль" th:field="*{password}" name="password"><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{password}"></span><br><br>
+        <div id="f5">
+            <input type="text" placeholder="email" th:field="*{email}" id="eml" name="username"><span style="color: red"
+                                                                                             th:if="${#fields.hasErrors('email')}"
+                                                                                             th:errors="*{email}"></span>
+        </div>
 
-    <input type="submit" value="Зарегистрироваться">
-  </form>
+        <div id="f6">
+            <input type="text" placeholder="Телефон" th:field="*{phone}" id="phn"><span style="color: red"
+                                                                               th:if="${#fields.hasErrors('email')}"
+                                                                               th:errors="*{phone}"></span>
+        </div>
+
+        <div id="f7">
+            <input type="password" placeholder="Пароль" th:field="*{password}" name="password" id="pswd"><span
+                style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{password}"></span>
+        </div>
+
+        <div id="f8"><input type="submit" value="Зарегистрироваться" id="reg_btn"></div>
+
+    </form>
+</div>
 </body>
 </html>

@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Информация о товаре</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
 <body>
-<h3>Информация о товаре</h3>
-<a href="/"><input type="button" value="Вернуться к списку товаров"></a><br><br>
-<div style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 300px; padding: 20px">
-    <h3 th:text="'Наименование: ' + ${product.getTitle()}"></h3>
-    <div th:each="img : ${product.getImageList()}">
-        <img th:src="'/img/' + ${img.getFileName()}" width="300px">
+
+<a href="/"><input type="button" value="Вернуться к списку товаров" id="back"></a><br><br>
+
+<div id="main_info_product">
+
+    <div><h3 th:text="'Наименование: ' + ${product.getTitle()}"></h3></div>
+
+    <div id="div_product_info_image">
+        <div >
+            <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
+        </div>
+        <div >
+            <img th:src="'/img/' + ${product.imageList[1].getFileName()}" width="200px">
+        </div>
+        <div >
+            <img th:src="'/img/' + ${product.imageList[2].getFileName()}" width="200px">
+        </div>
     </div>
-    <p th:text="'Автор: ' + ${product.getAuthor()}"></p>
-    <p th:text="'Страна: ' + ${product.getCountry()}"></p>
-    <p th:text="'Издатель: ' + ${product.getPublisher()}"></p>
-    <p th:text="'Кол-во страниц: ' + ${product.getPages()}"></p>
-    <p th:text="'Год издания: ' + ${product.getYear_of_issue()}"></p>
-    <p th:text="'Описание: ' + ${product.getDescriptions()}"></p>
-    <p th:text="'Цена: ' + ${product.getPrice()}  + ' руб.'"></p><br>
-    <br>
+
+    <div>
+        <p th:text="'Автор: ' + ${product.getAuthor()}"></p>
+        <p th:text="'Страна: ' + ${product.getCountry()}"></p>
+        <p th:text="'Издатель: ' + ${product.getPublisher()}"></p>
+        <p th:text="'Кол-во страниц: ' + ${product.getPages()}"></p>
+        <p th:text="'Год издания: ' + ${product.getYear_of_issue()}"></p>
+        <p th:text="'Описание: ' + ${product.getDescriptions()}"></p>
+        <p th:text="'Цена: ' + ${product.getPrice()}  + ' руб.'"></p><br>
+    </div>
 </div>
 </body>
 </html>

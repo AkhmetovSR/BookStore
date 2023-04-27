@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Корзина</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link type="Image/x-icon"
+          href="https://abrakadabra.fun/uploads/posts/2021-12/1639967436_1-abrakadabra-fun-p-logotip-kniga-na-prozrachnom-fone-1.png"
+          rel="icon">
 </head>
 <body>
-    <a href="/personalAccount"><input type="button" value="Вернуться к списку товаров"></a><br><br>
-    <h3>Корзина</h3>
-    <div th:each="product : ${cart_product}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" style="border: 1px solid grey; border-radius: 5px; margin: 5px; width: 200px; padding: 5px">
-        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="200px">
-        <br>
-        <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-        <br>
-        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-        <a th:href="@{/cart/delete/{id}(id=${product.getId()})}"><input type="button" value="Убрать товар из корзины"></a>
-        <br>
+<a href="/personalAccount"><input type="button" value="Вернуться на главную" id="back"></a><br><br>
+<h2 style="margin-left: 40px">Корзина</h2>
+<div id="main_cart">
+    <div id="all_product">
+        <div th:each="product : ${cart_product}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="product_card" style="border-radius: 5px; margin: 5px; width: 200px">
+            <div><img th:src="'/img/' + ${product.imageList[0].getFileName()}" id="a_img"></div>
+            <div><a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a></div>
+            <div><p th:text="'Цена: ' + ${product.getPrice()} + ' руб.'"></p></div>
+            <a th:href="@{/cart/delete/{id}(id=${product.getId()})}"><input type="button" value="Убрать товар из корзины" id="add_a"></a>
+        </div>
     </div>
-    <br>
-    <h3 th:text="'Итоговая цена: ' + ${price}"></h3>
-    <br>
-    <a href="/order/create"><input type="button" value="Оформить заказ"></a>
+</div>
+<h3 th:text="'Итоговая цена: ' + ${price}" style="margin-left: 40px"></h3>
+<a href="/order/create"><input type="button" value="Оформить заказ" id="order_apply"></a>
 </body>
 </html>
